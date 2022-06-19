@@ -43,14 +43,14 @@ function adicionarCartas(i){
 
     <div class="cartaConteudo some">
     <img src="./Arquivos Úteis - Projeto 04 - Parrot Card Game/${arrayJogo[i]}">
-    <div class="id some"> ${arrayJogo[i]} </div>
+    <div class="id none"> ${arrayJogo[i]} </div>
     </div>
     </li>
 `; 
 }
 
-let primeiroSelecionado = 1000, segundoSelecionado = 10;
-let selecionado =0;
+let primeiroSelecionado, segundoSelecionado, elementoSelecionado1, elementoSelecionado2, cartaSelecionada;
+let selecionado =0, acertos=0;
 
 function select(cartaSelecionada){
 
@@ -67,24 +67,66 @@ function select(cartaSelecionada){
     gif.classList.remove("some");
     cartaSelecionada.classList.add("virada");
 
-
-    if (selecionado == 0){
-        selecionado = 1;
-        primeiroSelecionado = cartaSelecionada.querySelector(".id");
-    } else if (selecionado == 1){
-        selecionado = 0;
-        segundoSelecionado = cartaSelecionada.querySelector(".id");
+    // se carta ja ta virada
+   
+    if (cartaSelecionada.querySelector(".acertou")){
+        return;
     }
 
-    if (primeiroSelecionado.innerHTML == segundoSelecionado.innerHTML){
-        console.log("haa para ne");
-    // } else {
-    //     primeiroSelecionado="";
-    //     segundoSelecionado="";
-    // }
+    //quando nao tem nenhum selecionado
+    if (selecionado == 0){
+        selecionado = 1;
+        
+        primeiroSelecionado = cartaSelecionada.querySelector(".id");
+    }
+    // quando ja tem um selecionado 
+    else if (selecionado == 1){
+        selecionado = 0;
+        segundoSelecionado = cartaSelecionada.querySelector(".id");
 
-    
+        if (primeiroSelecionado.innerHTML == segundoSelecionado.innerHTML){
+            acertos++;
+            primeiroSelecionado.parentNode.classList.add("acertou");
+            segundoSelecionado.parentNode.classList.add("acertou");
+            console.log("boa!");
+            
+      
+            
+              } else {
+                setTimeout(desvirarCartas,2000);
+                //   primeiroSelecionado="";
+                //   segundoSelecionado="";
+                  console.log("errou");
+              }
+    }  
+        
+    // conferir se venceu
+        if (acertos==numCartas/2){  
+            alert("karai borracha");
+        } else{
+            console.log(`acertos depois interacoes = ${acertos}`);
+        }
 }
+
+function desvirarCartas(){
+    console.log(primeiroSelecionado, segundoSelecionado);
+
+    // desvirando
+    primeiroSelecionado.parentNode.parentNode.classList.remove("virada");
+    segundoSelecionado.parentNode.parentNode.classList.remove("virada");
+
+    // aparece papagaios
+    primeiroSelecionado.parentElement.querySelector("img").classList.remove("some");
+    segundoSelecionado.parentElement.querySelector("img").classList.remove("some");
+    
+    // some gifs
+    primeiroSelecionado.parentElement.classList.add("some");
+    segundoSelecionado.parentElement.classList.add("some");
+
+}
+
+function alertaGanhou(){
+    alert("parabens karaio");
 }
 
 function comparador() { 

@@ -36,6 +36,7 @@ li{
     display: flex;
     align-items: center;
     position: relative;
+    cursor: pointer;
 }
 
 li img{
@@ -57,4 +58,14 @@ li img{
 }
 .virada{
     transform: rotateY(180deg);
+}
+.none {
+    display: none;
+}
+.acertou{
+    background-color: red;
+}
+.errou{
+background-color: rosybrown;
+transform: rotateY(-180deg);
 }
