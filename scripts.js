@@ -50,12 +50,14 @@ function adicionarCartas(i){
 }
 
 let primeiroSelecionado, segundoSelecionado, cartaSelecionada, id1,id2;
-let selecionado =0, acertos=0;
-
+let selecionado =0, acertos=0, cliques=0;
 
 function select(cartaSelecionada){
-    
-    
+    cliques++;
+    if (document.querySelector(".block")){
+        alert("Aguarde um instante para jogar novamente");
+        return;
+    }
 
     let papagaio = cartaSelecionada.querySelector("img");
     let gif = cartaSelecionada.querySelector(".cartaConteudo");
@@ -69,7 +71,6 @@ function select(cartaSelecionada){
     if (cartaSelecionada.querySelector(".acertou")){
         return;
       } 
-  
 
     //quando nao tem nenhum selecionado
     if (selecionado == 0){
@@ -95,20 +96,23 @@ function select(cartaSelecionada){
                 primeiroSelecionado.parentNode.classList.add("acertou");
                 segundoSelecionado.parentNode.classList.add("acertou");
                 selecionado=0;
+                segundoSelecionado.classList.remove("block");
             
                 
                   } else {
                     setTimeout(desvirarCartas,1500);
                     setTimeout(limpar,1501);
-                    
                   }
-        } else {alert("aí não vale....");
+        } else {alert("Aí não vale....");
       
-        primeiroSelecionado = cartaSelecionada.querySelector(".id");}
+        primeiroSelecionado = cartaSelecionada.querySelector(".id");
+        segundoSelecionado.classList.remove("block");
+        desvirarCartas();}
     }  
         
     // conferir se venceu
         if (acertos==numCartas/2){  
+            console.log("aee");
             setTimeout(alertaGanhou,1000);
         }
     }
@@ -133,7 +137,7 @@ function desvirarCartas(){
 }
 
 function alertaGanhou(){
-    alert("parabens karaio");
+    alert(`Parabéns, você ganhou em ${cliques} jogadas`);
 }
 
 function limpar(){
