@@ -38,10 +38,10 @@ for (let i = 0; i< numCartas; i++){
 }
 
 function adicionarCartas(i){
-    ul.innerHTML += `<li class="cartaPadrao" onclick="select(this)"> 
+    ul.innerHTML += `<li class="cartaPadrao" data-identifier="card" onclick="select(this)"> 
     <img class="papagaio" src="./Arquivos Úteis - Projeto 04 - Parrot Card Game/front.png">
 
-    <div class="cartaConteudo some">
+    <div class="cartaConteudo some" data-identifier="back-face">
     <img src="./Arquivos Úteis - Projeto 04 - Parrot Card Game/${arrayJogo[i]}">
     <div class="id none"> ${arrayJogo[i]} </div> <span class="none">${i}</span>
     </div>
