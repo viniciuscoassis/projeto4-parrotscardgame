@@ -54,7 +54,7 @@ li img{
     justify-content: center;
     align-items: center;
     left: 10px;
-    transition: all 2s linear;
+    transition: all .5s linear;
 }
 .virada{
     transform: rotateY(180deg);
@@ -63,8 +63,12 @@ li img{
     display: none;
 }
 .acertou{
-    background-color: red;
+
 }
+.acertou:hover{
+    filter: brightness(1.6);
+}
+
 .errou{
 background-color: rosybrown;
 transform: rotateY(-180deg);
